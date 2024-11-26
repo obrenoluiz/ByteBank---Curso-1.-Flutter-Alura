@@ -1,3 +1,4 @@
+import 'package:bytebank_armazenamento_interno/pages/contacts/contacts_list.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -8,7 +9,6 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard'),
-      
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -20,28 +20,37 @@ class HomePage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              color: Theme.of(context).primaryColor,
-              height: 100,
-              width: 150,
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Icon(
-                    Icons.people,
-                    color: Colors.white,
-                    size: 30,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const ContactsList(),
                   ),
-                  Text(
-                    'Contacts',
-                    style: TextStyle(
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                color: Theme.of(context).primaryColor,
+                height: 100,
+                width: 150,
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.people,
                       color: Colors.white,
-                      fontSize: 20,
+                      size: 30,
                     ),
-                  ),
-                ],
+                    Text(
+                      'Contacts',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
