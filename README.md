@@ -1,16 +1,59 @@
-# app_armazenamento_interno
+# ByteBank - Curso 1: Flutter ~ Alura
 
-A new Flutter project.
+Este repositório contém o projeto **ByteBank**, desenvolvido como parte do curso de Flutter da **Alura**. Trata-se de um aplicativo que explora conceitos fundamentais de Flutter, incluindo criação de interfaces e gerenciamento de **armazenamento interno de informações**.
 
-## Getting Started
+## 🚀 Funcionalidades
 
-This project is a starting point for a Flutter application.
+- 📋 **Cadastro de transferências**: Adicione transferências financeiras com descrição e valor.
+- 🗂️ **Listagem de transferências**: Visualize as transferências realizadas diretamente na interface.
+- 💾 **Armazenamento interno**: Persistência local de dados no dispositivo do usuário.
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠️ Tecnologias
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Linguagem**: Dart
+- **Framework**: Flutter
+- **Armazenamento**: 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📚 Aprendizados
+
+Este projeto foca nos seguintes tópicos:
+1. Estruturação de interfaces responsivas no Flutter.
+2. Navegação entre telas.
+3. Gerenciamento de estado básico.
+4. Persistência de dados no armazenamento interno.
+
+## 🔧 Pré-requisitos
+
+Antes de começar, você precisará ter as seguintes ferramentas instaladas:
+
+- [Flutter](https://flutter.dev/docs/get-started/install)
+- [Dart](https://dart.dev/get-dart)
+- Um editor de código (recomendado: [Visual Studio Code](https://code.visualstudio.com/) ou [Android Studio](https://developer.android.com/studio))
+
+## 🚀 Como executar
+
+1. Clone este repositório:
+```git clone https://github.com/seu-usuario/bytebank-curso1-flutter.git```
+
+2. Instale as dependências:
+```flutter pub get```
+
+3. Inicie o aplicativo:
+```flutter run```
+
+📂 Estrutura do Projeto
+```lib/
+├── main.dart           # Arquivo principal que inicializa o app.
+├── pages/
+│   └── home/           # Página principal do aplicativo.
+│       └── home_page.dart
+```
+
+📖 Referências
+- Curso Flutter: Fundamentos
+- Documentação do Flutter
+
+📝 Licença
+Este projeto é apenas para fins educacionais e faz parte dos cursos da Alura. Sinta-se à vontade para explorar e aprender!
+
+Desenvolvido com 💙 durante o curso da Alura.
