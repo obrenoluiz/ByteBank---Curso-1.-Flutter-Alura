@@ -1,10 +1,9 @@
+import 'package:bytebank_armazenamento_interno/database/app_database.dart';
 import 'package:bytebank_armazenamento_interno/models/contact.dart';
 import 'package:bytebank_armazenamento_interno/pages/contacts/new_contact.dart';
 import 'package:flutter/material.dart';
 
 class ContactsList extends StatelessWidget {
-  final List<Contact> contacts = List<Contact>.empty(growable: true);
-
   ContactsList({super.key});
 
   @override
@@ -13,13 +12,29 @@ class ContactsList extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Contacts'),
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          final Contact contact = contacts[index];
-
-          return _ContactItem(contact);
+      body: FutureBuilder<List<Contact>>(
+        initialData: List.empty(),
+        future: Future.delayed(const Duration(seconds: 1)).then((_) => findAll()),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (snapshot.hasData &&
+              snapshot.data != null &&
+              snapshot.data!.isNotEmpty) {
+            final List<Contact> contacts = snapshot.data!;
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                final Contact contact = contacts[index];
+                return _ContactItem(contact);
+              },
+              itemCount: contacts.length,
+            );
+          } else {
+            return const Center(child: Text('No contacts found.'));
+          }
         },
-        itemCount: contacts.length,
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
