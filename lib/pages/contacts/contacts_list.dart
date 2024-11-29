@@ -4,7 +4,7 @@ import 'package:bytebank_armazenamento_interno/pages/contacts/new_contact.dart';
 import 'package:flutter/material.dart';
 
 class ContactsList extends StatelessWidget {
-  ContactsList({super.key});
+  const ContactsList({super.key});
 
   @override
   Widget build(BuildContext context) {
