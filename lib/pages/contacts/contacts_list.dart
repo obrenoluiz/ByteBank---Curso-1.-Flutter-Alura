@@ -1,8 +1,11 @@
+import 'package:bytebank_armazenamento_interno/models/contact.dart';
 import 'package:bytebank_armazenamento_interno/pages/contacts/new_contact.dart';
 import 'package:flutter/material.dart';
 
 class ContactsList extends StatelessWidget {
-  const ContactsList({super.key});
+  final List<Contact> contacts = List<Contact>.empty(growable: true);
+
+  ContactsList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,40 +13,46 @@ class ContactsList extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Contacts'),
       ),
-      body: ListView(
-        children: [
-          Card(
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Theme.of(context).primaryColor,
-                child: const Text('A'),
-              ),
-              title: const Text('Ana Silva'),
-              subtitle: const Text('123456789'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Theme.of(context).primaryColor,
-                child: const Text('J'),
-              ),
-              title: const Text('João Santos'),
-              subtitle: const Text('987654321'),
-            ),
-          ),
-        ],
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          final Contact contact = contacts[index];
+
+          return _ContactItem(contact);
+        },
+        itemCount: contacts.length,
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add),
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => NewContact(),
-            ),
-          ).then((newContact) => debugPrint(newContact.toString()));
+          Navigator.of(context)
+              .push(
+                MaterialPageRoute(
+                  builder: (context) => NewContact(),
+                ),
+              )
+              .then((newContact) => debugPrint(newContact.toString()));
         },
+      ),
+    );
+  }
+}
+
+class _ContactItem extends StatelessWidget {
+  final Contact contact;
+
+  const _ContactItem(this.contact);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: Theme.of(context).primaryColor,
+          child: Text(contact.name[0]),
+        ),
+        title: Text(contact.name),
+        subtitle: Text(contact.accountNumber.toString()),
       ),
     );
   }
