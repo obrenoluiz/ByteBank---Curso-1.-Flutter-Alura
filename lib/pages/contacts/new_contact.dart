@@ -42,7 +42,7 @@ class _NewContactState extends State<NewContact> {
             child: TextField(
               controller: _accountNumberController,
               decoration: const InputDecoration(
-                labelText: 'Account Number',
+                labelText: 'Número da Conta',
                 prefixIcon: Icon(Icons.account_balance),
                 border: OutlineInputBorder(),
                 enabledBorder: OutlineInputBorder(),
@@ -74,7 +74,7 @@ class _NewContactState extends State<NewContact> {
                   final int? accountNumber =
                       int.tryParse(_accountNumberController.text);
 
-                  final Contact newContact = Contact(name, accountNumber!);
+                  final Contact newContact = Contact(0, name, accountNumber!);
 
                   Navigator.pop(context, newContact);
                 },
