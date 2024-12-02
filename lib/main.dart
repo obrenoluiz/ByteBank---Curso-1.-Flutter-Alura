@@ -7,7 +7,7 @@ void main() {
   runApp(const ByteBank());
 
   // save(Contact(0, 'alex', 1000)).then((id) {
-    findAll().then((contacts) => print(contacts.toString()));
+    findAll().then((contacts) => debugPrint(contacts.toString()));
   // });
 }
 

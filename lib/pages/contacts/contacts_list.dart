@@ -14,25 +14,26 @@ class ContactsList extends StatelessWidget {
       ),
       body: FutureBuilder<List<Contact>>(
         initialData: List.empty(),
-        future: Future.delayed(const Duration(seconds: 1)).then((_) => findAll()),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (snapshot.hasData &&
-              snapshot.data != null &&
-              snapshot.data!.isNotEmpty) {
-            final List<Contact> contacts = snapshot.data!;
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                final Contact contact = contacts[index];
-                return _ContactItem(contact);
-              },
-              itemCount: contacts.length,
-            );
-          } else {
-            return const Center(child: Text('No contacts found.'));
+        future: findAll(),
+        builder: (context, snapshot) {          
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              return const Center(child: CircularProgressIndicator());
+            case ConnectionState.waiting:
+              return const Center(child: CircularProgressIndicator());
+            case ConnectionState.active:
+              return const Center(child: CircularProgressIndicator());
+            case ConnectionState.done:
+              final List<Contact> contacts = snapshot.data!;
+              return ListView.builder(
+                itemCount: contacts.length,
+                itemBuilder: (context, index) {
+                  final Contact contact = contacts[index];
+                  return _ContactItem(contact);
+                },
+              );
+            default:
+              return const Text('Ocorreu um erro ao buscar os usuários.');
           }
         },
       ),
