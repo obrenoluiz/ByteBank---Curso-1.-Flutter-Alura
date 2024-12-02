@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:bytebank_armazenamento_interno/database/app_database.dart';
 import 'package:bytebank_armazenamento_interno/models/contact.dart';
 import 'package:bytebank_armazenamento_interno/pages/contacts/new_contact.dart';
