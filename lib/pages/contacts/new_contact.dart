@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:bytebank_armazenamento_interno/database/app_database.dart';
 import 'package:bytebank_armazenamento_interno/models/contact.dart';
 import 'package:flutter/material.dart';
 
@@ -73,10 +76,11 @@ class _NewContactState extends State<NewContact> {
                   final String name = _nameController.text;
                   final int? accountNumber =
                       int.tryParse(_accountNumberController.text);
-
                   final Contact newContact = Contact(0, name, accountNumber!);
-
-                  Navigator.pop(context, newContact);
+                  save(newContact).then((id) {
+                    Navigator.pop(context,
+                        true);
+                  });
                 },
               ),
             ),

@@ -3,8 +3,27 @@ import 'package:bytebank_armazenamento_interno/models/contact.dart';
 import 'package:bytebank_armazenamento_interno/pages/contacts/new_contact.dart';
 import 'package:flutter/material.dart';
 
-class ContactsList extends StatelessWidget {
+class ContactsList extends StatefulWidget {
   const ContactsList({super.key});
+
+  @override
+  _ContactsListState createState() => _ContactsListState();
+}
+
+class _ContactsListState extends State<ContactsList> {
+  late Future<List<Contact>> _contacts;
+
+  @override
+  void initState() {
+    super.initState();
+    _contacts = findAll();
+  }
+
+  void _refreshContacts() {
+    setState(() {
+      _contacts = findAll();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +33,8 @@ class ContactsList extends StatelessWidget {
       ),
       body: FutureBuilder<List<Contact>>(
         initialData: List.empty(),
-        future: findAll(),
-        builder: (context, snapshot) {          
+        future: _contacts,
+        builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
               return const Center(child: CircularProgressIndicator());
@@ -24,14 +43,18 @@ class ContactsList extends StatelessWidget {
             case ConnectionState.active:
               return const Center(child: CircularProgressIndicator());
             case ConnectionState.done:
-              final List<Contact> contacts = snapshot.data!;
-              return ListView.builder(
-                itemCount: contacts.length,
-                itemBuilder: (context, index) {
-                  final Contact contact = contacts[index];
-                  return _ContactItem(contact);
-                },
-              );
+              if (snapshot.hasData) {
+                final List<Contact> contacts = snapshot.data!;
+                return ListView.builder(
+                  itemCount: contacts.length,
+                  itemBuilder: (context, index) {
+                    final Contact contact = contacts[index];
+                    return _ContactItem(contact);
+                  },
+                );
+              } else {
+                return const Text('Nenhum contato encontrado.');
+              }
             default:
               return const Text('Ocorreu um erro ao buscar os usuários.');
           }
@@ -39,20 +62,23 @@ class ContactsList extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
-        child: const Icon(Icons.add),
         onPressed: () {
-          Navigator.of(context)
-              .push(
-                MaterialPageRoute(
-                  builder: (context) => NewContact(),
-                ),
-              )
-              .then((newContact) => debugPrint(newContact.toString()));
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => NewContact(),
+            ),
+          ).then((value) {
+            if (value == true) {
+              _refreshContacts();
+            }
+          });
         },
+        child: const Icon(Icons.add),
       ),
     );
   }
 }
+
 
 class _ContactItem extends StatelessWidget {
   final Contact contact;
