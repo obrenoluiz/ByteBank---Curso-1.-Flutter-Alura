@@ -1,6 +1,6 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors_in_immutables
 
-import 'package:bytebank_armazenamento_interno/database/app_database.dart';
+import 'package:bytebank_armazenamento_interno/database/dao/contact_dao.dart';
 import 'package:bytebank_armazenamento_interno/models/contact.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +13,7 @@ class NewContact extends StatefulWidget {
 
 class _NewContactState extends State<NewContact> {
   final TextEditingController _nameController = TextEditingController();
+  final ContactDao _dao = ContactDao();
 
   final TextEditingController _accountNumberController =
       TextEditingController();
@@ -77,9 +78,8 @@ class _NewContactState extends State<NewContact> {
                   final int? accountNumber =
                       int.tryParse(_accountNumberController.text);
                   final Contact newContact = Contact(0, name, accountNumber!);
-                  save(newContact).then((id) {
-                    Navigator.pop(context,
-                        true);
+                  _dao.save(newContact).then((id) {
+                    Navigator.pop(context, true);
                   });
                 },
               ),

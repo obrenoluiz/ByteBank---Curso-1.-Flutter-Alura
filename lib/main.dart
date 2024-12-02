@@ -1,13 +1,14 @@
-import 'package:bytebank_armazenamento_interno/database/app_database.dart';
-import 'package:bytebank_armazenamento_interno/models/contact.dart';
+import 'package:bytebank_armazenamento_interno/database/dao/contact_dao.dart';
 import 'package:bytebank_armazenamento_interno/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const ByteBank());
 
+  final ContactDao _dao = ContactDao();
+
   // save(Contact(0, 'alex', 1000)).then((id) {
-    findAll().then((contacts) => debugPrint(contacts.toString()));
+    _dao.findAll().then((contacts) => debugPrint(contacts.toString()));
   // });
 }
 

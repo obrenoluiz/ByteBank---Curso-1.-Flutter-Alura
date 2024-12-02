@@ -1,6 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
-import 'package:bytebank_armazenamento_interno/database/app_database.dart';
+import 'package:bytebank_armazenamento_interno/database/dao/contact_dao.dart';
 import 'package:bytebank_armazenamento_interno/models/contact.dart';
 import 'package:bytebank_armazenamento_interno/pages/contacts/new_contact.dart';
 import 'package:flutter/material.dart';
@@ -15,15 +15,17 @@ class ContactsList extends StatefulWidget {
 class _ContactsListState extends State<ContactsList> {
   late Future<List<Contact>> _contacts;
 
+  final ContactDao _dao = ContactDao();
+
   @override
   void initState() {
     super.initState();
-    _contacts = findAll();
+    _contacts = _dao.findAll();
   }
 
   void _refreshContacts() {
     setState(() {
-      _contacts = findAll();
+      _contacts = _dao.findAll();
     });
   }
 
@@ -65,11 +67,13 @@ class _ContactsListState extends State<ContactsList> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
         onPressed: () {
-          Navigator.of(context).push(
+          Navigator.of(context)
+              .push(
             MaterialPageRoute(
               builder: (context) => NewContact(),
             ),
-          ).then((value) {
+          )
+              .then((value) {
             if (value == true) {
               _refreshContacts();
             }
@@ -80,7 +84,6 @@ class _ContactsListState extends State<ContactsList> {
     );
   }
 }
-
 
 class _ContactItem extends StatelessWidget {
   final Contact contact;
