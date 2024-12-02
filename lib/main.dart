@@ -5,11 +5,9 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(const ByteBank());
 
-  final ContactDao _dao = ContactDao();
+  final ContactDao dao = ContactDao();
 
-  // save(Contact(0, 'alex', 1000)).then((id) {
-    _dao.findAll().then((contacts) => debugPrint(contacts.toString()));
-  // });
+  dao.findAll().then((contacts) => debugPrint(contacts.toString()));
 }
 
 class ByteBank extends StatelessWidget {
