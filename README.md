@@ -49,10 +49,6 @@ Antes de começar, você precisará ter as seguintes ferramentas instaladas:
 │       └── home_page.dart
 ```
 
-📖 Referências
-- Curso Flutter: Fundamentos
-- Documentação do Flutter
-
 📝 Licença
 Este projeto é apenas para fins educacionais e faz parte dos cursos da Alura. Sinta-se à vontade para explorar e aprender!
 
