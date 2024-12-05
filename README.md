@@ -12,7 +12,7 @@ Este repositório contém o projeto **ByteBank**, desenvolvido como parte do cur
 
 - **Linguagem**: Dart
 - **Framework**: Flutter
-- **Armazenamento**: 
+- **Armazenamento**: Utiliza armazenamento interno com um banco de dados SQL, implementado pelo pacote sqflite. Este banco de dados local é usado para armazenar e gerenciar dados de forma eficiente dentro do aplicativo, garantindo persistência mesmo quando o aplicativo é fechado.
 
 ## 📚 Aprendizados
 
